@@ -1,0 +1,44 @@
+﻿@model TravelRequest
+
+<h2>Edit TravelRequest</h2>
+<br />
+@if (Model != null)
+{
+    <div>
+        <form method="post">
+
+            <div class="form-group">
+                <label for="EmployeeId">EmployeeId:</label>
+                <input asp-for="EmployeeId" value=@Model.EmployeeId class="form-control" name="EmployeeId" />
+                <span asp-validation-for="EmployeeId" style="color:red; font-size:small"></span>
+            </div>
+            <div class="form-group">
+                <label for="FromLocation">FromLocation:</label>
+                <input asp-for="FromLocation" value=@Model.FromLocation class="form-control" name="FromLocation" />
+                <span asp-validation-for="FromLocation" style="color:red; font-size:small"></span>
+            </div>
+            <div class="form-group">
+                <label for="ToLocation">ToLocation:</label>
+                <input asp-for="ToLocation" value=@Model.ToLocation class="form-control" name="ToLocation" />
+                <span asp-validation-for="ToLocation" style="color:red; font-size:small"></span>
+            </div>
+            <div class="form-group">
+                <label for="RequestDate">Request Date:</label>
+                <input asp-for="RequestDate" class="form-control" />
+                <span asp-validation-for="RequestDate" style="color: red; font-size: small"></span>
+            </div>
+           
+
+
+            <br />
+            <div asp-validation-summary="All" style="color:red; font-size:small"></div>
+            <hr />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+}
+@section Scripts{
+    @{
+        Html.RenderPartial("_ValidationScriptsPartial");
+    }
+}

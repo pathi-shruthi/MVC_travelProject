@@ -1,0 +1,119 @@
+﻿@model IEnumerable<TravelRequest>
+<h2>Travel Request List</h2>
+<br />
+<hr />
+<button class="btn btn-outline-secondary" style="background-color:lightblue"><a asp-action="RaiseRequest">Raise Travel Request</a></button>
+<br />
+<hr />
+@if (Model != null)
+{
+    <table class="table table-striped" style="background-color:cadetblue">
+        <tr>
+            <th>Requested ID</th>
+            <th>Employee ID</th>
+            <th>From Location</th>
+            <th>To Location</th>
+            <th>RequestDate</th>
+            <th>Approve Status</th>
+            <th>Booking Status</th>
+            <th>CurrentStatus</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Approve Request</th>
+            <th>Boookig Request</th>
+           
+            
+        </tr>
+
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td>@request.RequestedId</td>
+                <td>@request.EmployeeId</td>
+                <td>@request.FromLocation</td>
+                <td>@request.ToLocation</td>
+                <td>@request.RequestDate</td>
+                <td>@request.ApproveStatus</td>
+                <td>@request.BookingStatus</td>
+                <td>@request.CurrentStatus</td>
+
+                
+                <td>
+                    
+                    @if (request.CurrentStatus != "Close")
+                    {
+                        <button class="btn btn-info-outline" style="background-color:yellowgreen">
+                            <a asp-action="UpdateTravelRequest" asp-route-RequestedId="@request.RequestedId">Edit</a>
+                        </button>
+                    }
+                    else{
+                    
+                    
+                        <button class="btn btn-outline-info" disabled>
+                            Edit
+                        </button>
+                    }
+                </td>
+
+                <td>
+                    @if (request.CurrentStatus != "Close")
+                    {
+                        <button class="btn btn-outline-danger" style="background-color:lightpink">
+                            <a asp-action="DeleteRequest" asp-route-RequestedId="@request.RequestedId">Delete</a>
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-outline-danger" disabled>
+                            Delete
+                        </button>
+                    }
+
+                </td>
+                @if (request.ApproveStatus == "Pending")
+                {
+                    <td>
+                        <button class="btn btn-outline-info">
+                            <a asp-action="ApproveTravelRequest" asp-route-RequestedId=@request.RequestedId>Approve Request</a>
+                        </button>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <button class="btn btn-outline-info" disabled>
+                            <a>Approve Request</a>
+                        </button>
+                    </td>
+                }
+
+                @if (request.BookingStatus == "Pending")
+                {
+                    <td>
+                       
+
+                        <button class="btn btn-outline-info"  disabled>
+                            <a asp-action="BookingTravelRequest" asp-route-RequestedId=@request.RequestedId>Book Request</a>
+                        </button>
+                    </td>
+
+                }
+                else
+                {
+                    <td>
+                        <button class="btn btn-outline-info" disabled>
+                            <a>Book Request</a>
+                        </button>
+                    </td>
+                }
+
+
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h2>No Travel Requests available</h2>
+}
+</hr>

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Employee>
+<h2>Employee List</h2>
+<button class="btn btn-outline-secondary"><a asp-action="AddEmployee">Add Employee</a></button>
+
+@{
+    @if (Model != null)
+    {
+        <table class="table table-striped">
+
+            <tr>
+                <td>Employee_id</td>
+                <td>Firstname</td>
+                <td>Lastname</td>
+                <td>Contact</td>
+                <td>Dept</td>
+                <td>Address</td>
+                <td>Dob</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+
+            @foreach (var e in Model)
+            {
+                <tr>
+                    <td>@e.EmployeeId</td>
+                    <td>@e.FirstName</td>
+                    <td>@e.LastName</td>
+                    <td>@e.Contact</td>
+                    <td>@e.Dept</td>
+                    <td>@e.Address</td>
+                    <td>@e.Dob</td>
+                   
+                    
+
+                    <td>
+                        <button class="btn btn-info-outline"style="background-color:yellowgreen">
+                            <a asp-action="UpdateEmployee" asp-route-EmployeeId=@e.EmployeeId>Update</a>
+                        </button>
+                    </td>
+
+                    <td>
+                        <button class="btn btn-outline-danger" style="background-color:lightpink">
+                            <a asp-action="DeleteEmployee" asp-route-EmployeeId=@e.EmployeeId>Delete</a>
+                        </button>
+                    </td>
+
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <h2>No Employee available</h2>
+    }
+
+    <hr />
+
+}
+
